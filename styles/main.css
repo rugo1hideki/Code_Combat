@@ -46,27 +46,6 @@ a {
   color: #fff;
 }
 
-green {
-  filter: invert(24%) sepia(82%) saturate(622%) hue-rotate(35deg)
-    brightness(98%) contrast(129%);
-}
-
-yellow {
-  filter: hue-rotate(60deg) sepia(100%) saturate(900%);
-}
-orange {
-  filter: invert(55%) sepia(10%) saturate(4163%) hue-rotate(335deg)
-    brightness(102%) contrast(96%);
-}
-red {
-  filter: invert(55%) sepia(10%) saturate(4163%) hue-rotate(305deg)
-    brightness(102%) contrast(96%);
-}
-undefined {
-  filter: invert(24%) sepia(82%) saturate(622%) hue-rotate(905deg)
-    brightness(50%) contrast(129%);
-}
-
 article {
   background-color: rgba(0, 0, 0, 0.4);
   padding: 10px 20px;
