@@ -3,7 +3,7 @@ const path = require("path");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const Contact = require("./models/contact");
+const Level = require("./models/level");
 
 const app = express();
 
@@ -35,9 +35,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("styles"));
 
 app.get("/", (req, res) => {
-  const title = "Области";
-  Contact.find()
-    .then((contacts) => res.render(createPath("contacts"), { contacts, title }))
+  const title = "Main Menu";
+  Level.find()
+    .then((levels) => res.render(createPath("levels"), { levels, title }))
     .catch((error) => {
       console.log(error);
       res.render(createPath("error"), { title: "Error" });

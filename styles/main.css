@@ -35,6 +35,7 @@ nav a {
 
 li {
   list-style: none;
+  position: static;
 }
 
 ul {
@@ -73,6 +74,27 @@ form {
 form div {
   margin-bottom: 20px;
   display: flex;
+}
+
+pos1 {
+  padding: 10px 20px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.posH {
+  top: 100px;
+  position: absolute;
+  width: 100px;
+}
+
+.mystyle {
+  width: 100%;
+  padding: 25px;
+  background-color: coral;
+  color: white;
+  font-size: 25px;
+  box-sizing: border-box;
 }
 
 form div label {
@@ -136,10 +158,9 @@ textarea {
 }
 
 .obls li {
-  position: fixed;
+  position: static;
   padding-left: 20px;
   list-style-position: inside;
-  margin-left: 300px;
 }
 
 .error-code {
