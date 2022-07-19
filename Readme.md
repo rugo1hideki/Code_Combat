@@ -10,11 +10,11 @@ Create a .env file and enter PORT=3000 and MONGO_URL = "your Mongo database" wit
 - Pos = character
 - Id = character destination
 
-After entering `npm run dev` into the console and following the link to `http://localhost:3000/`
+After entering `npm run dev` into the console and following the link to `[http://localhost:3000/]:http://localhost:3000/`
 
 ---
 
-This project was inspired by `"https://codecombat.com/"` codecombat.com
+This project was inspired by `[codecombat.com]:https://codecombat.com/`
 
 In it, you have to bring the character to the cheese.
 To do this you need to use the character control commands:
