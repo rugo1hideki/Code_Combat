@@ -37,7 +37,17 @@ app.use(express.static("styles"));
 app.get("/", (req, res) => {
   const title = "Main Menu";
   Level.find()
-    .then((levels) => res.render(createPath("levels"), { levels, title }))
+    .then((levels) => res.render(createPath("home"), { levels, title }))
+    .catch((error) => {
+      console.log(error);
+      res.render(createPath("error"), { title: "Error" });
+    });
+});
+
+app.get("/level1", (req, res) => {
+  const title = "Level 1";
+  Level.find()
+    .then((levels) => res.render(createPath("level1"), { levels, title }))
     .catch((error) => {
       console.log(error);
       res.render(createPath("error"), { title: "Error" });

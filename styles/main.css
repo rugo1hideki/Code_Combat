@@ -69,6 +69,7 @@ form {
   border-radius: 3px;
   display: flex;
   flex-direction: column;
+  width: 400px;
 }
 
 form div {
@@ -83,9 +84,26 @@ pos1 {
 }
 
 .posH {
-  top: 100px;
+  top: 405px;
   position: absolute;
-  width: 100px;
+  width: 90px;
+  left: 750px;
+}
+
+#el2 {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 610px;
+  left: 750px;
+}
+
+#el3 {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 510px;
+  left: 1150px;
 }
 
 .mystyle {
@@ -167,4 +185,20 @@ textarea {
   text-transform: uppercase;
   font-size: 160px;
   margin-bottom: 20px;
+}
+
+.lab-text {
+  margin: 10px 0;
+  padding: 5px;
+  border: 1px solid #999;
+}
+
+.cheese {
+  width: 80px;
+  height: 80px;
+}
+
+.rock {
+  width: 80px;
+  height: 80px;
 }

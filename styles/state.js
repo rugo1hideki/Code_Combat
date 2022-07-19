@@ -4,369 +4,248 @@ function ready() {
 }
 document.addEventListener("DOMContentLoaded", ready);
 
-class TrafficLight {
+function splitString(stringToSplit, separator) {
+  var arrayOfStrings = stringToSplit.split(separator);
+
+  console.log('The original line: "' + stringToSplit + '"');
+  console.log('Separator: "' + separator + '"');
+  console.log(
+    "The array contains " +
+      arrayOfStrings.length +
+      " elements: " +
+      arrayOfStrings.join(" / ")
+  );
+}
+
+var comma = ",";
+
+var pos = 750;
+var hor = 400;
+
+class Computer {
   constructor() {
-    this.states = [new GreenLight(), new RedLight(), new YellowLight()];
-    this.current = this.states[0];
+    console.log("Computer created");
   }
 
-  change() {
-    const totalStates = this.states.length;
-    let currentIndex = this.states.findIndex((light) => light === this.current);
-    if (currentIndex + 1 < totalStates)
-      this.current = this.states[currentIndex + 1];
-    else this.current = this.states[0];
-  }
+  right() {
+    var elem = document.getElementById("train");
+    var el2 = document.getElementById("el2");
+    var el3 = document.getElementById("el3");
+    train.offsetBottom = train.offsetTop + train.offsetHeight;
+    train.offsetRight = train.offsetLeft + train.offsetWidth;
+    el2.offsetBottom = el2.offsetTop + el2.offsetHeight;
+    el2.offsetRight = el2.offsetLeft + el2.offsetWidth;
+    el3.offsetBottom = el3.offsetTop + el3.offsetHeight;
+    el3.offsetRight = el3.offsetLeft + el3.offsetWidth;
 
-  sign() {
-    return this.current.sign();
-  }
-}
-
-class Light {
-  constructor(light) {
-    this.light = light;
-  }
-}
-
-class RedLight extends Light {
-  constructor() {
-    super("red");
-  }
-
-  sign() {
-    return "STOP";
-  }
-}
-
-class YellowLight extends Light {
-  constructor() {
-    super("yellow");
-  }
-
-  sign() {
-    return "STEADY";
-  }
-}
-
-class GreenLight extends Light {
-  constructor() {
-    super("green");
-  }
-
-  sign() {
-    return "GO";
-  }
-}
-
-// usage
-const trafficLight = new TrafficLight();
-
-console.log(trafficLight.sign()); // 'GO'
-trafficLight.change();
-
-console.log(trafficLight.sign()); // 'STOP'
-trafficLight.change();
-
-console.log(trafficLight.sign()); // 'STEADY'
-trafficLight.change();
-
-console.log(trafficLight.sign()); // 'GO'
-trafficLight.change();
-
-console.log(trafficLight.sign()); // 'STOP'
-
-//ЕЩЕ ОДИН ВАРИАНТ, ПОСЛОЖНЕЕ
-class GumballMachine {
-  static gumballAmount;
-  static soldCounter = 0;
-  constructor(gumballNum) {
-    if (!gumballNum) {
-      throw new Error(
-        `При создании ${this.constructor.name} не было указано изначальное количество шариков`
-      );
-    }
-    GumballMachine.gumballAmount = gumballNum;
-    this.states = {
-      noCoin: new NoCoin(),
-      isCoin: new IsCoin(),
-      gumballSold: new GumballSold(),
-      emptyMachine: new EmptyMachine(),
-    };
-    this.current = this.states.noCoin;
-  }
-
-  InsertCoin() {
-    this.current.InsertCoin(this);
-  }
-
-  ReturnCoin() {
-    this.current.ReturnCoin(this);
-  }
-
-  SellGumball() {
-    this.current.SellGumball(this);
-  }
-  AddGumball(num) {
-    GumballMachine.gumballAmount = num;
-    this.current = this.states.noCoin;
-    console.log("Жевачка добавлена в количестве: " + num + " шт.");
-  }
-}
-
-//Классы состояний
-class GumballStates {
-  //
-  InsertCoin() {
-    throw new Error(`В ${this.constructor.name} не описан метод InsertCoin()`);
-  }
-  ReturnCoin() {
-    throw new Error(`В ${this.constructor.name} не описан метод InsertCoin()`);
-  }
-  SellGumball() {
-    throw new Error(`В ${this.constructor.name} не описан метод InsertCoin()`);
-  }
-}
-
-//нет монетки
-class NoCoin extends GumballStates {
-  InsertCoin(machine) {
-    let start = Date.now();
-
-    let timer = setInterval(function () {
-      let timePassed = Date.now() - start;
-
-      train.style.left = timePassed / 5 + "px";
-
-      if (timePassed > 2000) clearInterval(timer);
-    }, 20);
-
-    console.log("Монетка вставлена");
-    machine.current = machine.states.isCoin;
-  }
-  ReturnCoin() {
-    console.error(`Нельзя вернуть монетку т.к. она не вставлена`);
-  }
-  SellGumball() {
-    console.error(`Нельзя продать жевачку т.к. не вставлена монетка`);
-  }
-}
-// есть монетка
-class IsCoin extends GumballStates {
-  InsertCoin() {
-    console.error(`Нельзя вставить монетку т.к. она уже вставлена`);
-  }
-  ReturnCoin(machine) {
-    console.log("Монетка возвращена");
-    machine.current = machine.states.noCoin;
-  }
-  SellGumball() {
-    if (GumballMachine.gumballAmount > 0) {
-      console.log(`Жевачка успешно продана и выдана!`);
-      machine.current = machine.states.gumballSold;
-      GumballMachine.gumballAmount = GumballMachine.gumballAmount - 1;
-      GumballMachine.soldCounter += 1;
-      console.log(GumballMachine.soldCounter);
-      if (!(GumballMachine.soldCounter % 10)) {
-        // если количество продаж кратно 10 - выдаем счастливую жвачку
-        console.log(`Счастливая жевачка успешно выдана! LUCKY MAN!!!`);
+    if (
+      train.offsetBottom < el2.offsetTop ||
+      train.offsetTop > el2.offsetBottom ||
+      train.offsetRight + 100 < el2.offsetLeft ||
+      train.offsetLeft > el2.offsetRight
+    ) {
+      var top = pos + 100;
+      var id = setInterval(frame, 5);
+      function frame() {
+        if (pos == top) {
+          clearInterval(id);
+        } else {
+          pos++;
+          elem.style.left = pos + "px";
+        }
       }
     } else {
-      machine.current = machine.states.emptyMachine;
-      console.log("Извините, монетки не принимаются т.к. аппарат пуст");
-      console.log("Монетка возвращена");
+      alert("Something's in the way.");
+    }
+
+    if (
+      !(
+        train.offsetBottom < el3.offsetTop ||
+        train.offsetTop > el3.offsetBottom ||
+        train.offsetRight + 100 < el3.offsetLeft ||
+        train.offsetLeft > el3.offsetRight
+      )
+    ) {
+      document.getElementById("el3").hidden = true;
+      alert("You win");
     }
   }
-}
-// жевачка продана
-class GumballSold extends GumballStates {
-  InsertCoin(machine) {
-    if (GumballMachine.gumballAmount > 0) {
-      machine.current = machine.states.isCoin;
-      console.log("Монетка вставлена");
+
+  down() {
+    var elem = document.getElementById("train");
+    train.offsetBottom = train.offsetTop + train.offsetHeight;
+    train.offsetRight = train.offsetLeft + train.offsetWidth;
+    el2.offsetBottom = el2.offsetTop + el2.offsetHeight;
+    el2.offsetRight = el2.offsetLeft + el2.offsetWidth;
+    el3.offsetBottom = el3.offsetTop + el3.offsetHeight;
+    el3.offsetRight = el3.offsetLeft + el3.offsetWidth;
+
+    if (
+      train.offsetBottom + 100 < el2.offsetTop ||
+      train.offsetTop > el2.offsetBottom ||
+      train.offsetRight < el2.offsetLeft ||
+      train.offsetLeft > el2.offsetRight
+    ) {
+      var top = hor + 100;
+      var id = setInterval(frame, 5);
+      function frame() {
+        if (hor == top) {
+          clearInterval(id);
+        } else {
+          hor++;
+          elem.style.top = hor + "px";
+        }
+      }
     } else {
-      machine.current = machine.states.emptyMachine;
-      console.log("Извините, монетки не принимаются т.к. аппарат пуст");
+      alert("Something's in the way.");
+    }
+
+    if (
+      !(
+        train.offsetBottom + 100 < el3.offsetTop ||
+        train.offsetTop > el3.offsetBottom ||
+        train.offsetRight < el3.offsetLeft ||
+        train.offsetLeft > el3.offsetRight
+      )
+    ) {
+      document.getElementById("el3").hidden = true;
+      alert("You win");
     }
   }
-  ReturnCoin() {
-    console.error("Нельзя вернуть монетку т.к. жевачка уже выдана");
+
+  up() {
+    var elem = document.getElementById("train");
+    train.offsetBottom = train.offsetTop + train.offsetHeight;
+    train.offsetRight = train.offsetLeft + train.offsetWidth;
+    el2.offsetBottom = el2.offsetTop + el2.offsetHeight;
+    el2.offsetRight = el2.offsetLeft + el2.offsetWidth;
+    el3.offsetBottom = el3.offsetTop + el3.offsetHeight;
+    el3.offsetRight = el3.offsetLeft + el3.offsetWidth;
+
+    if (
+      train.offsetBottom < el2.offsetTop ||
+      train.offsetTop - 100 > el2.offsetBottom ||
+      train.offsetRight < el2.offsetLeft ||
+      train.offsetLeft > el2.offsetRight
+    ) {
+      var top = hor - 100;
+      var id = setInterval(frame, 5);
+      function frame() {
+        if (hor == top) {
+          clearInterval(id);
+        } else {
+          hor--;
+          elem.style.top = hor + "px";
+        }
+      }
+    } else {
+      alert("Something's in the way.");
+    }
+
+    if (
+      !(
+        train.offsetBottom < el3.offsetTop ||
+        train.offsetTop - 100 > el3.offsetBottom ||
+        train.offsetRight < el3.offsetLeft ||
+        train.offsetLeft > el3.offsetRight
+      )
+    ) {
+      document.getElementById("el3").hidden = true;
+      alert("You win");
+    }
   }
-  SellGumball() {
-    console.error(`Нельзя продать жевачку т.к. она уже продана`);
-  }
-}
-//автомат пустой, жевачек нет
-class EmptyMachine extends GumballStates {
-  InsertCoin() {
-    console.log("Извините, монетки не принимаются т.к. аппарат пуст");
-  }
-  ReturnCoin() {
-    console.error("Нельзя вернуть монетку т.к. монетка не вставлена");
-  }
-  SellGumball() {
-    console.error(`Нельзя продать жевачку т.к. она автомат пуст`);
+
+  left() {
+    var elem = document.getElementById("train");
+    train.offsetBottom = train.offsetTop + train.offsetHeight;
+    train.offsetRight = train.offsetLeft + train.offsetWidth;
+    el2.offsetBottom = el2.offsetTop + el2.offsetHeight;
+    el2.offsetRight = el2.offsetLeft + el2.offsetWidth;
+    el3.offsetBottom = el3.offsetTop + el3.offsetHeight;
+    el3.offsetRight = el3.offsetLeft + el3.offsetWidth;
+
+    if (
+      train.offsetBottom < el2.offsetTop ||
+      train.offsetTop > el2.offsetBottom ||
+      train.offsetRight < el2.offsetLeft ||
+      train.offsetLeft > el2.offsetRight + 100
+    ) {
+      var top = pos - 100;
+      var id = setInterval(frame, 5);
+      function frame() {
+        if (pos == top) {
+          clearInterval(id);
+        } else {
+          pos--;
+          elem.style.left = pos + "px";
+        }
+      }
+    } else {
+      alert("Something's in the way.");
+    }
+
+    if (
+      !(
+        train.offsetBottom + 100 < el3.offsetTop ||
+        train.offsetTop > el3.offsetBottom ||
+        train.offsetRight < el3.offsetLeft ||
+        train.offsetLeft > el3.offsetRight
+      )
+    ) {
+      document.getElementById("el3").hidden = true;
+      alert("You win");
+    }
   }
 }
 
-// usage
-const machine = new GumballMachine(1);
-machine.InsertCoin();
-machine.ReturnCoin();
-machine.InsertCoin();
-machine.SellGumball();
-machine.InsertCoin();
-machine.SellGumball();
-machine.AddGumball(10);
-machine.InsertCoin();
-machine.SellGumball();
-machine.InsertCoin();
-machine.AddGumball(10);
-machine.InsertCoin();
-machine.SellGumball(100);
+class Invoker {
+  constructor() {
+    console.log("Invoker created");
+  }
+
+  SetCommand(...command) {
+    this.commands = command;
+  }
+  Execute() {
+    for (let command of this.commands) {
+      command();
+    }
+  }
+}
+
+let invoker = new Invoker();
+let receiver = new Computer();
 
 document.querySelector("#submit").onclick = function () {
-  let a = document.getElementById("key").value;
-  console.log(a);
-
-  class TrafficLight {
-    constructor() {
-      this.states = [new GreenLight(), new RedLight(), new YellowLight()];
-      this.current = this.states[0];
-    }
-
-    change() {
-      const totalStates = this.states.length;
-      let currentIndex = this.states.findIndex(
-        (light) => light === this.current
-      );
-      if (currentIndex + 1 < totalStates)
-        this.current = this.states[currentIndex + 1];
-      else this.current = this.states[0];
-    }
-
-    sign() {
-      return this.current.sign();
-    }
-  }
-
-  class Light {
-    constructor(light) {
-      this.light = light;
-    }
-  }
-
-  class RedLight extends Light {
-    constructor() {
-      super("red");
-    }
-
-    sign() {
-      return "STOP";
-    }
-  }
-
-  class YellowLight extends Light {
-    constructor() {
-      super("yellow");
-    }
-
-    sign() {
-      return "STEADY";
-    }
-  }
-
-  class GreenLight extends Light {
-    constructor() {
-      super("green");
-    }
-
-    sign() {
-      return "GO";
-    }
-  }
-
-  // usage
-  const trafficLight = new TrafficLight();
-
-  console.log(trafficLight.sign());
-  trafficLight.change();
-
-  console.log(trafficLight.sign());
-  trafficLight.change();
-
-  const machine = new GumballMachine(1);
-  var arr = ["Яблоко", "Апельсин", "trafficLight.change()"];
-
-  arr.forEach(function (i) {
-    switch (i) {
-      case "Яблоко":
-        alert("Маловато");
-        alert(i);
-        trafficLight.change();
-        alert(trafficLight.sign());
-        break;
-      // case "trafficLight.change()":
-      // alert("trafficLight.change()");
-      //break;
-      case "machine.InsertCoin()":
-        machine.ReturnCoin();
-        alert(i);
-        alert("machine.InsertCoin()");
-        machine.InsertCoin();
-        break;
-      default:
-        alert("Нет таких значений");
-        break;
-    }
-  });
-
-  function splitString(stringToSplit, separator) {
-    var arrayOfStrings = stringToSplit.split(separator);
-
-    console.log('Оригинальная строка: "' + stringToSplit + '"');
-    console.log('Разделитель: "' + separator + '"');
-    console.log(
-      "Массив содержит " +
-        arrayOfStrings.length +
-        " элементов: " +
-        arrayOfStrings.join(" / ")
-    );
-    alert(arrayOfStrings.length);
-
-    switch (arrayOfStrings.length) {
-      case 12:
-        alert("12");
-        break;
-      case 4:
-        alert("В точку!");
-        break;
-      case 5:
-        alert("Перебор");
-        break;
-      default:
-        alert("Нет таких значений");
-        break;
-    }
-  }
-
-  var monthString = "Янв,Фев,Мар,Апр,Май,Июн,Июл,Авг,Сен,Окт,Ноя,Дек";
-  //var monthString = ["Янв,Фев,Мар,Апр,Май,Июн,Июл,Авг,Сен,Окт,Ноя,Дек"];
-  var comma = ",";
+  var a = document.getElementById("key").value;
+  let qwe = a.split(" ").join("");
+  console.log("qwe", qwe);
+  let r = qwe.split(",");
+  console.log("r", r);
 
   splitString(a, comma);
 
-  machine.InsertCoin();
-  machine.ReturnCoin();
-  machine.InsertCoin();
-  machine.SellGumball();
-  machine.InsertCoin();
-  machine.SellGumball();
-  machine.AddGumball(10);
-  machine.InsertCoin();
-  machine.SellGumball();
-  machine.InsertCoin();
-  machine.AddGumball(10);
-  machine.InsertCoin();
-  machine.SellGumball(100);
+  function showTime() {
+    r.forEach(function (i) {
+      switch (i) {
+        case "invoker.SetCommand(receiver.right)":
+          invoker.SetCommand(receiver.right);
+          invoker.Execute();
+          break;
+        case "invoker.SetCommand(receiver.down)":
+          invoker.SetCommand(receiver.down);
+          invoker.Execute();
+          break;
+        case "invoker.SetCommand(receiver.left)":
+          invoker.SetCommand(receiver.left);
+          invoker.Execute();
+          break;
+        case "invoker.SetCommand(receiver.up)":
+          invoker.SetCommand(receiver.up);
+          invoker.Execute();
+          break;
+      }
+    });
+  }
+  showTime();
 };
