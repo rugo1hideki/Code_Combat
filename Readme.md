@@ -1,6 +1,6 @@
-    # Begin
+Begin
 
-    If you want to deploy an application to your device, download this repository and enter the command `npm install` into the console.
+If you want to deploy an application to your device, download this repository and enter the command `npm install` into the console.
 
 Create a .env file and enter PORT=3000 and MONGO_URL = "your Mongo database" with these parameters
 
@@ -22,5 +22,3 @@ For the character to start moving, you must enter `invoker.SetCommand(receiver.f
 For example, the character will move to the right: `invoker.SetCommand(receiver.right)`.
 
 After that you can choose left, up and down.
-
----
