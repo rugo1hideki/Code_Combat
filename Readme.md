@@ -9,6 +9,8 @@ Create a .env file and enter PORT=3000 and MONGO_URL = "your Mongo database" wit
 - Id = character destination
 
 After entering `npm run dev` into the console and following the link to `[http://localhost:3000/]:http://localhost:3000/`
+[example site]
+[example site]:http://example.com
 
 ---
 
