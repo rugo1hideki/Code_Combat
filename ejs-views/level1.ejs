@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %> <%- include('./partials/nav.ejs') %>
+  <body>
+    <ul class="obls">
+      <% if (levels.length) { %> <% levels.forEach(({ Mat, Pos, Id }) => { %>
+      <li>
+        <<%= Pos %>/>
+        <img id="<%= Id %>" src="<%= Mat %>" />
+      </li>
+      <% }) %> <% } %>
+    </ul>
+    <form name="search">
+      <input type="text" name="key" id="key"></input>
+  </form>
+  <button type="submit" id="submit">Action</button>
+
+  <div id="el2">
+    <img class="rock" src="/rock.webp" />  
+  </div>
+  <div id="el3">
+    <img class="cheese" src="/cheese.png" />  
+  </div>
+    <script src="/state.js"></script>
+  </body>
+</html>
