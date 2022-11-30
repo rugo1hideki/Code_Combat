@@ -22,7 +22,3 @@ For the character to start moving, you must enter `invoker.SetCommand(receiver.f
 For example, the character will move to the right: `invoker.SetCommand(receiver.right)`.
 
 After that you can choose left, up and down.
-
----
-
-Hosting - https://code-comba.herokuapp.com/
